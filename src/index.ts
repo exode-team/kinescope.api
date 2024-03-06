@@ -12,12 +12,10 @@ export class Kinescope {
      */
     private readonly apiUrl: string;
 
-
     /**
      * Kinescope token
      */
     private readonly token: string;
-
 
     /**
      * Constructor
@@ -26,21 +24,19 @@ export class Kinescope {
      */
     constructor(token: string) {
         // Api endpoint
-        this.apiUrl = 'https://uploader.kinescope.io/v2/video';
-        this.apiUrl = 'https://api.kinescope.io/v1/'
-        this.token = token
+        this.apiUrUpload = 'https://uploader.kinescope.io/v2/video';
+        this.apiUrl = 'https://api.kinescope.io/v1';
+        this.token = token;
     }
 
     /**
      * Get Parent_Id from Kinescope
-     *
-     * @param params - params for Init method except TerminalKey and Token
      */
 
     async getParentId() {
         const options = {
             method: 'GET',
-            url: this.apiUrl + 'projects',
+            url: this.apiUrl + '/projects',
             params: { per_page: '100', catalog_type: 'vod' },
             headers: {
                 'Content-Type': 'application/json',
@@ -57,6 +53,14 @@ export class Kinescope {
         }
     }
 
+    /**
+     * Get Parent_Id from Kinescope
+     *
+     * @param file - Video file
+     * @param title - Title of video
+     * @param parentId - ID of the project or folder to upload the video to.
+     */
+
     async uploadFile(file: File, title: string, parentId: string) {
         const options = {
             method: 'POST',
@@ -67,7 +71,7 @@ export class Kinescope {
                 'X-Video-Title': title,
                 Authorization: 'Bearer ' + this.token,
             },
-            body: file
+            body: file,
         };
 
         try {
