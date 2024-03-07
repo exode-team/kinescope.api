@@ -54,7 +54,7 @@ export class Kinescope {
     }
 
     /**
-     * Get Parent_Id from Kinescope
+     * POST upload video file to Kinescope
      *
      * @param file - Video file
      * @param title - Title of video
@@ -72,6 +72,35 @@ export class Kinescope {
                 Authorization: 'Bearer ' + this.token,
             },
             body: file,
+        };
+
+        try {
+            const { data } = await axios.request(options);
+
+            return data;
+        } catch (error) {
+            return error;
+        }
+    }
+
+    /**
+     * POST upload video link to Kinescope
+     *
+     * @param url - Video url
+     * @param title - Title of video
+     * @param parentId - ID of the project or folder to upload the video to.
+     */
+
+    async uploadUrlFile(url: string, title: string, parentId: string) {
+        const options = {
+            method: 'POST',
+            url: this.apiUrUpload,
+            headers: {
+                'X-Parent-Id': parentId,
+                'X-Video-Title': title,
+                'X-Video-URL': url,
+                Authorization: 'Bearer ' + this.token,
+            },
         };
 
         try {
