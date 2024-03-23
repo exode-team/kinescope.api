@@ -1,6 +1,6 @@
 {
   "name": "kinescope.api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "repository": "git@github.com:exode-team/kinescope.api.git",
   "author": "aslanorlov <aslanorlov@gmail.com>",
